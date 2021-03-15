@@ -28,12 +28,14 @@ module.exports = (phase) => {
   const assetPrefix = process.env.GITHUB_REPOSITORY
     ? `/${process.env.GITHUB_REPOSITORY.split('/', 2)[1]}`
     : '';
+  const basePath = assetPrefix
 
   console.log(`assetPrefix:${assetPrefix}`);
 
   // next.config.js object
   return {
     assetPrefix,
+    basePath,
     env
   };
 };
