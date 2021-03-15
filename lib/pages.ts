@@ -1,5 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticPropsContext } from 'next';
+import siteServerSideConfig from '../src/site.server-side-config';
 import client, { fetchConfig, ApiNameArticle } from './client';
 import {
   PagesList,
@@ -29,7 +30,6 @@ import { processorMarkdownToHtml } from './markdown';
 import { textLintInSections } from './draftlint';
 import { normalizedHtml } from './html';
 
-const globalPageId = '_global';
 // id が 1件で 40byte  と想定、 content-length が 5M 程度とのことなので、1000*1000*5 / 40 で余裕を見て決めた値。
 const allIdsLimit = 120000;
 // const itemsPerPage = 10;
@@ -202,8 +202,8 @@ export async function getPagesDataWithOuter(
       const ids =
         // TODO: id='' のテスト
         params.id !== ''
-          ? [globalPageId].concat(outerIds, id).join(',')
-          : [globalPageId].concat(outerIds).join(',');
+          ? [siteServerSideConfig.globalPageId].concat(outerIds, id).join(',')
+          : [siteServerSideConfig.globalPageId].concat(outerIds).join(',');
       const [, query] = applyPreviewDataToIdQuery<GetPagesItemsWithLayout>(
         preview,
         previewData,
@@ -228,7 +228,7 @@ export async function getPagesDataWithOuter(
       'pages',
       params.id as string,
       {
-        ids: [globalPageId].concat(outerIds).join(','),
+        ids: [siteServerSideConfig.globalPageId].concat(outerIds).join(','),
         fields:
           'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections'
       }

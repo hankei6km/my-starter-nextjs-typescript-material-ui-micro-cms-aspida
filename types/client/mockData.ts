@@ -1,8 +1,9 @@
+import siteServerSideConfig from '../../src/site.server-side-config';
 import { PagesContents, PagesContent } from './contentTypes';
 
 const mockDataPagesContents: PagesContents['contents'] = [
   {
-    id: '_global',
+    id: siteServerSideConfig.globalPageId,
     createdAt: '2020-12-27T04:04:30.107Z',
     updatedAt: '2020-12-27T04:04:30.107Z',
     publishedAt: '2020-12-27T04:04:30.107Z',

@@ -7,12 +7,14 @@ import {
 // ブラウザでは使わない or 見せたくない項目(セキュリティ的にの他にサイズ的な等
 
 type SiteServerSideConfig = {
+  globalPageId: string;
   imageConfig: {
     contentImageClassName: string;
     template: ImageTemplate[];
   };
 };
 const siteServerSideConfig: SiteServerSideConfig = {
+  globalPageId: '_global',
   imageConfig: {
     // siteConfig と重複している項目
     contentImageClassName: 'contentImage-img',

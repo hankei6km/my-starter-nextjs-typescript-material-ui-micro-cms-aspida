@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { previewSetupHandler } from '../../../lib/preview';
+import siteServerSideConfig from '../../../src/site.server-side-config';
 import { getAllPagesIds } from '../../../lib/pages';
 
 // apiName によって、どの API のプレビューか決定する..
@@ -17,7 +18,7 @@ const handler = async (
       // pages では slug は実質的には使わない(問題出るか?)
       // slug が指す id が含まれる location へリダイレクトさせる
       switch (id) {
-        case '_global':
+        case siteServerSideConfig.globalPageId:
           // どこにリダイレクトしても表示はされる
           location = `/`;
           break;

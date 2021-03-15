@@ -6,6 +6,7 @@ import {
   mockDataArticleLContent
 } from '../test/testMockData';
 import { FetchMock } from 'jest-fetch-mock';
+import siteServerSideConfig from '../src/site.server-side-config';
 import { getPagesPageData } from './pages';
 import {
   queryParams,
@@ -198,7 +199,7 @@ describe('getPagesPageData()', () => {
     // pages から global と home の取得. ここでは draftKey が使われる
     expect(fetchMock.mock.calls[0][0]).toContain('/pages?');
     expect(queryParams(String(fetchMock.mock.calls[0][0]))).toStrictEqual({
-      ids: '_global,home',
+      ids: `${siteServerSideConfig.globalPageId},home`,
       fields:
         'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections',
       draftKey: 'qqqqqq-56'
@@ -235,7 +236,7 @@ describe('getPagesPageData()', () => {
     // pages から global と home の取得. ここでは draftKey が使われない.
     expect(fetchMock.mock.calls[0][0]).toContain('/pages?');
     expect(queryParams(String(fetchMock.mock.calls[0][0]))).toStrictEqual({
-      ids: '_global,blog-posts',
+      ids: `${siteServerSideConfig.globalPageId},blog-posts`,
       fields:
         'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections'
     });
@@ -274,7 +275,7 @@ describe('getPagesPageData()', () => {
     // preview の api は pages なので draftKey が使われる
     expect(fetchMock.mock.calls[0][0]).toContain('/pages?');
     expect(queryParams(String(fetchMock.mock.calls[0][0]))).toStrictEqual({
-      ids: '_global,blog-posts',
+      ids: `${siteServerSideConfig.globalPageId},blog-posts`,
       fields:
         'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections',
 

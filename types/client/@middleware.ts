@@ -11,13 +11,14 @@ import {
   mockDataCategoryIds,
   mockDataCategoryList
 } from './mockData';
+import siteServerSideConfig from '../../src/site.server-side-config';
 
 // polymorph 対応
 export default mockMiddleware([
   (req, res, next) =>
     req.path === '/api/v1/pages' &&
     req.method === 'GET' &&
-    req.query?.ids === '_global,home'
+    req.query?.ids === `${siteServerSideConfig.globalPageId},home`
       ? res({
           status: 200,
           resBody: mockDataPagesOuterHome
@@ -26,7 +27,7 @@ export default mockMiddleware([
   (req, res, next) =>
     req.path === '/api/v1/pages' &&
     req.method === 'GET' &&
-    req.query?.ids === '_global,blog'
+    req.query?.ids === `${siteServerSideConfig.globalPageId},blog`
       ? res({
           status: 200,
           resBody: mockDataPagesOuterBlog
@@ -35,7 +36,7 @@ export default mockMiddleware([
   (req, res, next) =>
     req.path === '/api/v1/pages' &&
     req.method === 'GET' &&
-    req.query?.ids === '_global,blog-posts'
+    req.query?.ids === `${siteServerSideConfig.globalPageId},blog-posts`
       ? res({
           status: 200,
           resBody: mockDataPagesOuterPosts
@@ -44,7 +45,7 @@ export default mockMiddleware([
   (req, res, next) =>
     req.path === '/api/v1/pages' &&
     req.method === 'GET' &&
-    req.query?.ids === '_global,blog-category'
+    req.query?.ids === `${siteServerSideConfig.globalPageId},blog-category`
       ? res({
           status: 200,
           resBody: mockDataPagesOuterCategory

@@ -4,6 +4,7 @@ import {
   mockDataArticleCat2
 } from '../test/testMockData';
 import { FetchMock } from 'jest-fetch-mock';
+import siteServerSideConfig from '../src/site.server-side-config';
 import { getPagesPageData } from './pages';
 import { queryParams } from '../test/testUtils';
 
@@ -42,7 +43,7 @@ describe('getSortedPagesData()', () => {
     // pages から global 等の取得.
     expect(fetchMock.mock.calls[0][0]).toContain('/pages?');
     expect(queryParams(String(fetchMock.mock.calls[0][0]))).toStrictEqual({
-      ids: '_global,blog-category',
+      ids: `${siteServerSideConfig.globalPageId},blog-category`,
       fields:
         'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections'
     });

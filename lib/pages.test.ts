@@ -1,3 +1,4 @@
+import siteServerSideConfig from '../src/site.server-side-config';
 import {
   mockDataPages,
   mockDataPagesOuterHome,
@@ -35,7 +36,7 @@ describe('getSortedPagesData()', () => {
     expect(res).toStrictEqual({
       contents: [
         {
-          id: '_global',
+          id: siteServerSideConfig.globalPageId,
           createdAt: '2020-12-27T04:04:30.107Z',
           updatedAt: '2020-12-27T04:04:30.107Z',
           publishedAt: '2020-12-27T04:04:30.107Z',
@@ -104,7 +105,7 @@ describe('getAllPagesIds()', () => {
   it('should returns all ids', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(mockDataPagesIds));
     expect(await getAllPagesIds('pages')).toStrictEqual([
-      '_global',
+      siteServerSideConfig.globalPageId,
       'home',
       'blog',
       'blog-posts',
@@ -409,7 +410,7 @@ describe('getPagesPageData()', () => {
     // pages から global と home の取得.
     expect(fetchMock.mock.calls[0][0]).toContain('/pages?');
     expect(queryParams(String(fetchMock.mock.calls[0][0]))).toStrictEqual({
-      ids: '_global,home',
+      ids: `${siteServerSideConfig.globalPageId},home`,
       fields:
         'id,createdAt,updatedAt,publishedAt,revisedAt,title,kind,description,mainImage,category.id,category.title,sections'
     });
