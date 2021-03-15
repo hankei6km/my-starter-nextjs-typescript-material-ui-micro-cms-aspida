@@ -24,8 +24,16 @@ module.exports = (phase) => {
     })()
   };
 
+  // https://docs.github.com/ja/actions/reference/environment-variables
+  const assetPrefix = process.env.GITHUB_REPOSITORY
+    ? `/${process.env.GITHUB_REPOSITORY.split('/', 2)[1]}`
+    : '';
+
+  console.log(`assetPrefix:${assetPrefix}`);
+
   // next.config.js object
   return {
+    assetPrefix,
     env
   };
 };
