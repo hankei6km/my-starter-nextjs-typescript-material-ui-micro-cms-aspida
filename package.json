@@ -5,6 +5,7 @@
     "api:build": "aspida && aspida-mock",
     "dev": "aspida && aspida-mock && next",
     "build": "aspida && aspida-mock && next build",
+    "export": "aspida && aspida-mock && next export",
     "start": "aspida && aspida-mock && next start",
     "type-check": "tsc",
     "test": "jest"
