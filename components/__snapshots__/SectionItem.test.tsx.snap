@@ -5,11 +5,11 @@ exports[`SectionItem should renders Section by List  1`] = `
   <section
     class="MuiBox-root MuiBox-root-5 makeStyles-SectionItem-root-1"
   >
-    <h2
-      class="MuiTypography-root makeStyles-SectionItem-title-2 MuiTypography-h2"
+    <h3
+      class="MuiTypography-root makeStyles-SectionItem-title-2 MuiTypography-h6"
     >
       posts
-    </h2>
+    </h3>
     <div
       class="MuiBox-root MuiBox-root-9 makeStyles-SectionContent-root-6"
     >
@@ -26,7 +26,7 @@ exports[`SectionItem should renders Section by List  1`] = `
               class="MuiBox-root MuiBox-root-23 makeStyles-ArticleDetail-header-16"
             >
               <h3
-                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h3 MuiTypography-colorTextPrimary"
+                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h4 MuiTypography-colorTextPrimary"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -117,7 +117,7 @@ exports[`SectionItem should renders Section by List  1`] = `
               class="MuiBox-root MuiBox-root-33 makeStyles-ArticleDetail-header-16"
             >
               <h3
-                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h3 MuiTypography-colorTextPrimary"
+                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h4 MuiTypography-colorTextPrimary"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -208,7 +208,7 @@ exports[`SectionItem should renders Section by List  1`] = `
               class="MuiBox-root MuiBox-root-40 makeStyles-ArticleDetail-header-16"
             >
               <h3
-                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h3 MuiTypography-colorTextPrimary"
+                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h4 MuiTypography-colorTextPrimary"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -299,7 +299,7 @@ exports[`SectionItem should renders Section by List  1`] = `
               class="MuiBox-root MuiBox-root-47 makeStyles-ArticleDetail-header-16"
             >
               <h3
-                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h3 MuiTypography-colorTextPrimary"
+                class="MuiTypography-root makeStyles-ArticleDetail-title-19 MuiTypography-h4 MuiTypography-colorTextPrimary"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
