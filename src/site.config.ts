@@ -16,7 +16,7 @@ const siteConfig: {
     naked: false,
     component: {
       sectionComponent: 'section',
-      sectionTitleComponent: 'h2',
+      sectionTitleComponent: 'h3',
       articleDetailComponent: 'article',
       articleItemComponent: 'li',
       articleDetailTitleComponent: 'h3',
@@ -31,12 +31,12 @@ const siteConfig: {
       notificationTitleComponent: 'h3'
     },
     variant: {
-      sectionTitleVariant: 'h2',
-      articleDetailTitleVariant: 'h3',
+      sectionTitleVariant: 'h6',
+      articleDetailTitleVariant: 'h4',
       articleItemTitleVariant: 'body1',
-      siteTitleVariant: 'h2',
-      pageTitleVariant: 'h2',
-      navContentTocLabelVariant: 'h3',
+      siteTitleVariant: 'h3',
+      pageTitleVariant: 'h4',
+      navContentTocLabelVariant: 'h6',
       notificationTitleVariant: 'body1'
     }
   },

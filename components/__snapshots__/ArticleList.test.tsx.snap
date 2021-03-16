@@ -12,7 +12,7 @@ exports[`ArticleList should renders ArticleList 1`] = `
         class="MuiBox-root MuiBox-root-13 makeStyles-ArticleDetail-header-6"
       >
         <h3
-          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h3 MuiTypography-colorTextPrimary"
+          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h4 MuiTypography-colorTextPrimary"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -103,7 +103,7 @@ exports[`ArticleList should renders ArticleList 1`] = `
         class="MuiBox-root MuiBox-root-23 makeStyles-ArticleDetail-header-6"
       >
         <h3
-          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h3 MuiTypography-colorTextPrimary"
+          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h4 MuiTypography-colorTextPrimary"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -194,7 +194,7 @@ exports[`ArticleList should renders ArticleList 1`] = `
         class="MuiBox-root MuiBox-root-30 makeStyles-ArticleDetail-header-6"
       >
         <h3
-          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h3 MuiTypography-colorTextPrimary"
+          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h4 MuiTypography-colorTextPrimary"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
@@ -285,7 +285,7 @@ exports[`ArticleList should renders ArticleList 1`] = `
         class="MuiBox-root MuiBox-root-37 makeStyles-ArticleDetail-header-6"
       >
         <h3
-          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h3 MuiTypography-colorTextPrimary"
+          class="MuiTypography-root makeStyles-ArticleDetail-title-9 MuiTypography-h4 MuiTypography-colorTextPrimary"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
