@@ -17,15 +17,12 @@ const useStyles = makeStyles(() => ({
   pageMain: {
     ...wrapStyle(`& .${siteConfig.iamgeConfig.contentImageClassName}`, {
       maxWidth: '100%',
+      height: '100%',
       objectFit: 'scale-down'
     })
   },
   'SectionItem-root': {},
-  'SectionItem-title': {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
-  }
+  'SectionItem-title': {}
 }));
 
 const sectionConfigInPosts = mergeSectionConfig({
