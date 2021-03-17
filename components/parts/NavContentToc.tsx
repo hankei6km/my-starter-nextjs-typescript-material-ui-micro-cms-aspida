@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, ElementType } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import SiteContext from '../SiteContext';
 import SectionContext from '../SectionContext';
 // import Link from '../Link';
 import { Link as ScrollLink } from 'react-scroll';
@@ -16,12 +17,19 @@ const useStyles = makeStyles((theme) => ({
   'NavContentToc-label': {},
   'NavContentToc-list': {
     justifyContent: 'space-around',
-    // listStyle: 'none',
-    // '& li::before': {
-    //   content: '\u200B'
-    // }
-    '& .active': {
-      backgroundColor: theme.palette.grey[400]
+    listStyle: 'none',
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(1),
+    '& li::before': {
+      content: '\u200B'
+    },
+    '& li': {
+      '& :not(.active)': {
+        borderLeft: `4px solid ${theme.palette.background.default}`
+      },
+      '& .active': {
+        borderLeft: `4px solid ${theme.palette.primary.main}`
+      }
     }
   },
   'NavContentToc-item': {},
@@ -98,6 +106,7 @@ const NavContentTocItems = ({
 const NavContentToc = ({ classes: inClasses }: Props) => {
   const classes = useStyles({ classes: pruneClasses(inClasses, classNames) });
   const { contentToc } = useContext(PageContext);
+  const { labels } = useContext(SiteContext);
   const { component, variant } = useContext(SectionContext);
   const [visibleId, setVisibleId] = useState(
     contentToc.items.length > 0 ? contentToc.items[0].id : ''
@@ -167,7 +176,7 @@ const NavContentToc = ({ classes: inClasses }: Props) => {
         component={component.navContentTocLabelComponent}
         className={classes['NavContentToc-label']}
       >
-        {contentToc.label}
+        {labels.tocLabel || contentToc.label}
       </Typography>
       <NavContentTocItems
         items={contentToc.items}

@@ -72,10 +72,9 @@ const siteConfig: {
     }
   },
   labels: {
-    // contentConfig として参照される値.
-    // pages api の入力によってページ上にラベルとして表示されるので注意.
     siteTitle: process.env.SITE_TITLE || 'My Starter',
-    profileName: process.env.PROFILE_NAME || 'starter'
+    profileName: process.env.PROFILE_NAME || 'starter',
+    tocLabel: '目次'
   },
   images: {
     // contentConfig として参照される値.

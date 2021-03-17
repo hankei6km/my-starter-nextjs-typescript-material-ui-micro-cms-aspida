@@ -82,7 +82,7 @@ describe('NavContentToc', () => {
       );
       const rootNav = getByRole('navigation');
       expect(rootNav).toBeInTheDocument();
-      const label = getByText('toc');
+      const label = getByText('目次');
       expect(label).toBeInTheDocument();
       const active = getByText('item-1');
       expect(active).toBeInTheDocument();
