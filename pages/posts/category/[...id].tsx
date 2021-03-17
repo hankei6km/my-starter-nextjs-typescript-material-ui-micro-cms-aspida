@@ -49,6 +49,8 @@ export default function Post({
       <Layout
         headerSections={pageData.header}
         title={pageData.title}
+        topSections={pageData.top}
+        bottomSections={pageData.bottom}
         footerSections={pageData.footer}
       >
         <Box my={1}>
@@ -71,14 +73,12 @@ export default function Post({
             ]}
             classes={{ ...classes }}
           />
-          <SectionList sections={pageData.top} classes={{ ...classes }} />
           <Box className={classes.pageMain}>
             <SectionList
               sections={pageData.sections}
               classes={{ ...classes }}
             />
           </Box>
-          <SectionList sections={pageData.bottom} classes={{ ...classes }} />
           <SectionList
             sections={[
               {

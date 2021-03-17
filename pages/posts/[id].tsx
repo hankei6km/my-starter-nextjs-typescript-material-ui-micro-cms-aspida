@@ -13,13 +13,14 @@ import { wrapStyle } from '../../utils/classes';
 import PageContext from '../../components/PageContext';
 // import classes from '*.module.css';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   pageMain: {
     ...wrapStyle(`& .${siteConfig.iamgeConfig.contentImageClassName}`, {
       maxWidth: '100%',
       height: '100%',
       objectFit: 'scale-down'
-    })
+    }),
+    maxWidth: theme.breakpoints.values.sm
   },
   'SectionItem-root': {},
   'SectionItem-title': {}
@@ -44,18 +45,40 @@ export default function Post({
       <Layout
         headerSections={pageData.header}
         title={pageData.title}
+        topSections={pageData.top}
+        bottomSections={[
+          {
+            title: '',
+            content: [
+              {
+                kind: 'partsNavContentToc'
+              }
+            ]
+          },
+          ...pageData.bottom
+        ]}
         footerSections={pageData.footer}
       >
-        <Box my={1}>
+        <SectionList
+          sections={[
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavBreadcrumbs',
+                  lastBreadcrumb: pageData.title
+                }
+              ]
+            }
+          ]}
+          classes={{ ...classes }}
+        />
+        <Box component="section" className={classes.pageMain}>
           <SectionList
             sections={[
               {
                 title: '',
                 content: [
-                  {
-                    kind: 'partsNavBreadcrumbs',
-                    lastBreadcrumb: pageData.title
-                  },
                   {
                     kind: 'partsPageTitle',
                     link: ''
@@ -71,31 +94,29 @@ export default function Post({
             ]}
             classes={{ ...classes }}
           />
-          <SectionList sections={pageData.top} classes={{ ...classes }} />
-          <Box className={classes.pageMain}>
+          <Box display="block" component="article">
             <SectionList
               sections={pageData.sections}
               config={sectionConfigInPosts}
               classes={{ ...classes }}
             />
           </Box>
-          <SectionList
-            sections={[
-              {
-                title: '',
-                content: [
-                  {
-                    kind: 'partsNavCategory',
-                    all: false,
-                    categoryPath: '/posts/category'
-                  }
-                ]
-              }
-            ]}
-            classes={{ ...classes }}
-          />
-          <SectionList sections={pageData.bottom} classes={{ ...classes }} />
         </Box>
+        <SectionList
+          sections={[
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavCategory',
+                  all: false,
+                  categoryPath: '/posts/category'
+                }
+              ]
+            }
+          ]}
+          classes={{ ...classes }}
+        />
         <Link href="/posts">{'Back to posts'}</Link>
       </Layout>
     </PageContext.Provider>

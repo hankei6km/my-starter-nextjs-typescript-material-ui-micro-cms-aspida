@@ -39,7 +39,7 @@ const mockDataPagesContents: PagesContents['contents'] = [
         content: [
           {
             fieldId: 'contentMarkdown',
-            markdown: '---\n\nMy Starter'
+            markdown: 'My Starter'
           }
         ]
       }
@@ -127,7 +127,7 @@ const mockDataPagesContents: PagesContents['contents'] = [
         content: [
           {
             fieldId: 'contentMarkdown',
-            markdown: 'post top\n\n---'
+            markdown: 'post top'
           }
         ]
       },
@@ -136,7 +136,7 @@ const mockDataPagesContents: PagesContents['contents'] = [
         content: [
           {
             fieldId: 'contentMarkdown',
-            markdown: '---\n\npost bottom'
+            markdown: 'post bottom'
           }
         ]
       }
@@ -161,7 +161,7 @@ const mockDataPagesContents: PagesContents['contents'] = [
         content: [
           {
             fieldId: 'contentMarkdown',
-            markdown: 'category top\n\n---'
+            markdown: 'category top'
           }
         ]
       },
@@ -178,7 +178,7 @@ const mockDataPagesContents: PagesContents['contents'] = [
         content: [
           {
             fieldId: 'contentMarkdown',
-            markdown: '---\n\ncategory bottom'
+            markdown: 'category bottom'
           }
         ]
       }
