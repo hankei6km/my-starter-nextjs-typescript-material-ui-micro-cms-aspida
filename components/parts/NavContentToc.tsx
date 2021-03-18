@@ -170,6 +170,7 @@ const NavContentToc = ({ classes: inClasses }: Props) => {
     <Box
       component={component.navContentTocComponent}
       className={classes['NavContentToc-root']}
+      aria-labelledby="table-of-contens-navigation"
     >
       <Typography
         variant={variant.navContentTocLabelVariant}
