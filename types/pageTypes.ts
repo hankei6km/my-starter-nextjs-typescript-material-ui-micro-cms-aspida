@@ -84,6 +84,7 @@ export type SectionPartsNavPagination = {
 };
 export type SectionPartsNavContentToc = {
   kind: 'partsNavContentToc';
+  expanded: boolean;
 };
 
 export type TocItem = {

@@ -21,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
       objectFit: 'scale-down'
     }),
     maxWidth: theme.breakpoints.values.sm
-  },
-const useSectionStyles = makeStyles((theme) => ({
+  }
+}));
+
+const useSectionStyles = makeStyles(() => ({
   'SectionItem-root': {},
   'SectionItem-title': {}
 }));
@@ -73,7 +75,8 @@ export default function Post({
             title: '',
             content: [
               {
-                kind: 'partsNavContentToc'
+                kind: 'partsNavContentToc',
+                expanded: true
               }
             ]
           },
@@ -107,9 +110,6 @@ export default function Post({
                   },
                   {
                     kind: 'partsUpdated'
-                  },
-                  {
-                    kind: 'partsNavContentToc'
                   }
                 ]
               }
@@ -124,7 +124,8 @@ export default function Post({
                   title: '',
                   content: [
                     {
-                      kind: 'partsNavContentToc'
+                      kind: 'partsNavContentToc',
+                      expanded: false
                     }
                   ]
                 },
@@ -177,3 +178,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   };
 };
+

@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState, ElementType } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SiteContext from '../SiteContext';
 import SectionContext from '../SectionContext';
 // import Link from '../Link';
@@ -12,7 +15,17 @@ import { TocItems } from '../../types/pageTypes';
 
 const useStyles = makeStyles((theme) => ({
   'NavContentToc-root': {
-    width: '100%'
+    width: '100%',
+    '& .MuiAccordionSummary-root,': {
+      padding: 0,
+      minHeight: 0
+    },
+    '& .MuiAccordionSummary-content': {
+      margin: 0
+    },
+    '& .MuiAccordionDetails-root': {
+      padding: 0
+    }
   },
   'NavContentToc-label': {},
   'NavContentToc-list': {
@@ -50,7 +63,7 @@ const classNames = [
 ];
 
 export type NavContentTocComponent = {
-  navContentTocComponent: ElementType<any>;
+  navContentTocComponent: React.ElementType<React.HTMLAttributes<HTMLElement>>;
   navContentTocLabelComponent: ElementType<any>;
 };
 export type NavContentTocVariant = {
@@ -58,6 +71,7 @@ export type NavContentTocVariant = {
 };
 
 type Props = {
+  expanded?: boolean;
   classes?: { [key: string]: string };
 };
 const NavContentTocItems = ({
@@ -103,7 +117,7 @@ const NavContentTocItems = ({
   );
 };
 
-const NavContentToc = ({ classes: inClasses }: Props) => {
+const NavContentToc = ({ expanded = false, classes: inClasses }: Props) => {
   const classes = useStyles({ classes: pruneClasses(inClasses, classNames) });
   const { contentToc } = useContext(PageContext);
   const { labels } = useContext(SiteContext);
@@ -167,24 +181,36 @@ const NavContentToc = ({ classes: inClasses }: Props) => {
     };
   }, [contentToc.items]);
   return (
-    <Box
+    <Accordion
       component={component.navContentTocComponent}
+      elevation={0}
       className={classes['NavContentToc-root']}
       aria-labelledby="table-of-contens-navigation"
+      // defaultExpanded={expanded}
+      expanded={expanded === true ? true : undefined}
     >
-      <Typography
-        variant={variant.navContentTocLabelVariant}
-        component={component.navContentTocLabelComponent}
-        className={classes['NavContentToc-label']}
+      <AccordionSummary
+        expandIcon={expanded ? '' : <ExpandMoreIcon />}
+        aria-label="Expand"
+        aria-controls="additional-actions-table-of-contents"
+        id="table-of-contents-header"
       >
-        {labels.tocLabel || contentToc.label}
-      </Typography>
-      <NavContentTocItems
-        items={contentToc.items}
-        visibleId={visibleId}
-        classes={classes}
-      />
-    </Box>
+        <Typography
+          variant={variant.navContentTocLabelVariant}
+          component={component.navContentTocLabelComponent}
+          className={classes['NavContentToc-label']}
+        >
+          {labels.tocLabel || contentToc.label}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <NavContentTocItems
+          items={contentToc.items}
+          visibleId={visibleId}
+          classes={classes}
+        />
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
