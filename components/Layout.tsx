@@ -15,8 +15,10 @@ const useStyles = makeStyles((theme) => ({
   'LayoutHeader-sectionTop': {},
   'LayoutHeader-sectionList': {},
   'LayoutContaienr-root': {
-    display: 'flex',
-    justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
     width: '100%'
   },
   'LayoutContaienr-body': {
@@ -24,10 +26,18 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: theme.breakpoints.values.sm
   },
   'LayoutContaienrTop-sectionList': {
-    width: 300
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      width: 300
+    },
+    display: 'none'
   },
   'LayoutContaienrBottom-sectionList': {
-    width: 300
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      width: 300
+    },
+    display: 'none'
   },
   'LayoutContaienrTop-sectionList-inner': { position: 'sticky', top: 50 },
   'LayoutContaienrBottom-sectionList-inner': { position: 'sticky', top: 50 },

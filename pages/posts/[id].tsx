@@ -22,9 +22,28 @@ const useStyles = makeStyles((theme) => ({
     }),
     maxWidth: theme.breakpoints.values.sm
   },
+const useSectionStyles = makeStyles((theme) => ({
   'SectionItem-root': {},
   'SectionItem-title': {}
 }));
+
+const useNoneUpMdStyles = makeStyles((theme) => ({
+  'NavContentToc-root': {
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+    width: '100%'
+  }
+}));
+
+// const useDispUpMdStyles = makeStyles((theme) => ({
+//   'NavContentToc-root': {
+//     [theme.breakpoints.up('md')]: {
+//       display: 'none'
+//     },
+//     width: '100%'
+//   }
+// }));
 
 const sectionConfigInPosts = mergeSectionConfig({
   naked: true
@@ -37,6 +56,9 @@ export default function Post({
   preview: boolean;
 }) {
   const classes = useStyles();
+  const classesSection = useSectionStyles();
+  const classesNoneUpMd = useNoneUpMdStyles();
+  // const classesDispUpMd = useDispUpMdStyles();
   if (!pageData) {
     return <ErrorPage statusCode={404} />;
   }
@@ -71,7 +93,7 @@ export default function Post({
               ]
             }
           ]}
-          classes={{ ...classes }}
+          classes={{ ...classesSection }}
         />
         <Box component="section" className={classes.pageMain}>
           <SectionList
@@ -92,13 +114,24 @@ export default function Post({
                 ]
               }
             ]}
-            classes={{ ...classes }}
+            config={sectionConfigInPosts}
+            classes={{ ...classesSection }}
           />
           <Box display="block" component="article">
             <SectionList
-              sections={pageData.sections}
+              sections={[
+                {
+                  title: '',
+                  content: [
+                    {
+                      kind: 'partsNavContentToc'
+                    }
+                  ]
+                },
+                ...pageData.sections
+              ]}
               config={sectionConfigInPosts}
-              classes={{ ...classes }}
+              classes={{ ...classesSection, ...classesNoneUpMd }}
             />
           </Box>
         </Box>
@@ -115,7 +148,7 @@ export default function Post({
               ]
             }
           ]}
-          classes={{ ...classes }}
+          classes={{ ...classesSection }}
         />
         <Link href="/posts">{'Back to posts'}</Link>
       </Layout>
