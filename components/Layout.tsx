@@ -28,12 +28,22 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxWidth: theme.breakpoints.values.sm
   },
+  'LayoutContaienrTop-persistSectionList': {
+    [theme.breakpoints.up('md')]: {
+      width: 300
+    }
+  },
   'LayoutContaienrTop-sectionList': {
     [theme.breakpoints.up('md')]: {
       display: 'block',
       width: 300
     },
     display: 'none'
+  },
+  'LayoutContaienrBottom-persistSectionList': {
+    [theme.breakpoints.up('md')]: {
+      width: 300
+    }
   },
   'LayoutContaienrBottom-sectionList': {
     [theme.breakpoints.up('md')]: {
@@ -93,6 +103,8 @@ const classNames = [
   'LayoutContaienr-body',
   'LayoutContaienrTop-sectionList',
   'LayoutContaienrBottom-sectionList',
+  'LayoutContaienrTop-persistSectionList',
+  'LayoutContaienrBottom-persistSectionList',
   'LayoutContaienrTop-sectionList-inner',
   'LayoutContaienrBottom-sectionList-inner',
   'LayoutFooter-root',
@@ -138,9 +150,17 @@ const Layout = ({
   });
   const { siteTitle } = useContext(siteContext).labels;
   const headerSectionsLen = pageData.header.length;
-  const topSectionsLen = pageData.top.length;
+  const topPersistSections = pageData.top.filter(({ persist }) => persist);
+  const topPersistSectionsLen = topPersistSections.length;
+  const topSections = pageData.top.filter(({ persist }) => !persist);
+  const topSectionsLen = topSections.length;
   const sectionsLen = pageData.sections.length;
-  const bottomSectionsLen = pageData.bottom.length;
+  const bottomPersistSections = pageData.bottom.filter(
+    ({ persist }) => persist
+  );
+  const bottomPersistSectionsLen = bottomPersistSections.length;
+  const bottomSections = pageData.bottom.filter(({ persist }) => !persist);
+  const bottomSectionsLen = bottomSections.length;
   const footerSectionsLen = pageData.footer.length;
   const maxWidth = 'sm';
   return (
@@ -211,10 +231,20 @@ const Layout = ({
         </Container>
       </header>
       <Box className={classes['LayoutContaienr-root']}>
+        {topPersistSectionsLen > 0 && (
+          <Box className={classes['LayoutContaienrTop-persistSectionList']}>
+            <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
+              <SectionList
+                sections={topPersistSections}
+                classes={{ ...classes }}
+              />
+            </Box>
+          </Box>
+        )}
         {topSectionsLen > 0 && (
           <Box className={classes['LayoutContaienrTop-sectionList']}>
             <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
-              <SectionList sections={pageData.top} classes={{ ...classes }} />
+              <SectionList sections={topSections} classes={{ ...classes }} />
             </Box>
           </Box>
         )}
@@ -260,13 +290,20 @@ const Layout = ({
           )}
           <>{children}</>
         </Container>
+        {bottomPersistSectionsLen > 0 && (
+          <Box className={classes['LayoutContaienrBottom-persistSectionList']}>
+            <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
+              <SectionList
+                sections={bottomPersistSections}
+                classes={{ ...classes }}
+              />
+            </Box>
+          </Box>
+        )}
         {bottomSectionsLen > 0 && (
           <Box className={classes['LayoutContaienrBottom-sectionList']}>
             <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
-              <SectionList
-                sections={pageData.bottom}
-                classes={{ ...classes }}
-              />
+              <SectionList sections={bottomSections} classes={{ ...classes }} />
             </Box>
           </Box>
         )}
