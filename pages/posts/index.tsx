@@ -34,6 +34,8 @@ const PostsPage = ({ pageData }: { pageData: PageData }) => {
       <Layout
         headerSections={pageData.header}
         title={pageData.title}
+        topSections={pageData.top}
+        bottomSections={pageData.bottom}
         footerSections={pageData.footer}
       >
         <Box my={1}>
@@ -60,14 +62,12 @@ const PostsPage = ({ pageData }: { pageData: PageData }) => {
             ]}
             classes={{ ...classes }}
           />
-          <SectionList sections={pageData.top} classes={{ ...classes }} />
           <Box className={classes.pageMain}>
             <SectionList
               sections={pageData.sections}
               classes={{ ...classes }}
             />
           </Box>
-          <SectionList sections={pageData.bottom} classes={{ ...classes }} />
           <SectionList
             sections={[
               {

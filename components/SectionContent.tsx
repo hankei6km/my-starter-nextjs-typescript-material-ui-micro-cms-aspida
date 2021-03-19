@@ -95,7 +95,7 @@ const SectionContent = ({ content, classes: inClasses }: Props) => {
         />
       )}
       {content.kind === 'partsNavContentToc' && (
-        <NavContentToc classes={{ ...inClasses }} />
+        <NavContentToc expanded={content.expanded} classes={{ ...inClasses }} />
       )}
       {content.kind === 'posts' && (
         <Box className={classes['SectionContent-contentArticles']}>

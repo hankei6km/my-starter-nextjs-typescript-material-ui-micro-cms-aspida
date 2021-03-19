@@ -13,17 +13,39 @@ import { wrapStyle } from '../../utils/classes';
 import PageContext from '../../components/PageContext';
 // import classes from '*.module.css';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   pageMain: {
     ...wrapStyle(`& .${siteConfig.iamgeConfig.contentImageClassName}`, {
       maxWidth: '100%',
       height: '100%',
       objectFit: 'scale-down'
-    })
-  },
+    }),
+    maxWidth: theme.breakpoints.values.sm
+  }
+}));
+
+const useSectionStyles = makeStyles(() => ({
   'SectionItem-root': {},
   'SectionItem-title': {}
 }));
+
+const useNoneUpMdStyles = makeStyles((theme) => ({
+  'NavContentToc-root': {
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+    width: '100%'
+  }
+}));
+
+// const useDispUpMdStyles = makeStyles((theme) => ({
+//   'NavContentToc-root': {
+//     [theme.breakpoints.up('md')]: {
+//       display: 'none'
+//     },
+//     width: '100%'
+//   }
+// }));
 
 const sectionConfigInPosts = mergeSectionConfig({
   naked: true
@@ -36,6 +58,9 @@ export default function Post({
   preview: boolean;
 }) {
   const classes = useStyles();
+  const classesSection = useSectionStyles();
+  const classesNoneUpMd = useNoneUpMdStyles();
+  // const classesDispUpMd = useDispUpMdStyles();
   if (!pageData) {
     return <ErrorPage statusCode={404} />;
   }
@@ -44,58 +69,88 @@ export default function Post({
       <Layout
         headerSections={pageData.header}
         title={pageData.title}
+        topSections={pageData.top}
+        bottomSections={[
+          {
+            title: '',
+            content: [
+              {
+                kind: 'partsNavContentToc',
+                expanded: true
+              }
+            ]
+          },
+          ...pageData.bottom
+        ]}
         footerSections={pageData.footer}
       >
-        <Box my={1}>
+        <SectionList
+          sections={[
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavBreadcrumbs',
+                  lastBreadcrumb: pageData.title
+                }
+              ]
+            }
+          ]}
+          classes={{ ...classesSection }}
+        />
+        <Box component="section" className={classes.pageMain}>
           <SectionList
             sections={[
               {
                 title: '',
                 content: [
-                  {
-                    kind: 'partsNavBreadcrumbs',
-                    lastBreadcrumb: pageData.title
-                  },
                   {
                     kind: 'partsPageTitle',
                     link: ''
                   },
                   {
                     kind: 'partsUpdated'
-                  },
-                  {
-                    kind: 'partsNavContentToc'
                   }
                 ]
               }
             ]}
-            classes={{ ...classes }}
+            config={sectionConfigInPosts}
+            classes={{ ...classesSection }}
           />
-          <SectionList sections={pageData.top} classes={{ ...classes }} />
-          <Box className={classes.pageMain}>
+          <Box display="block" component="article">
             <SectionList
-              sections={pageData.sections}
+              sections={[
+                {
+                  title: '',
+                  content: [
+                    {
+                      kind: 'partsNavContentToc',
+                      expanded: false
+                    }
+                  ]
+                },
+                ...pageData.sections
+              ]}
               config={sectionConfigInPosts}
-              classes={{ ...classes }}
+              classes={{ ...classesSection, ...classesNoneUpMd }}
             />
           </Box>
-          <SectionList
-            sections={[
-              {
-                title: '',
-                content: [
-                  {
-                    kind: 'partsNavCategory',
-                    all: false,
-                    categoryPath: '/posts/category'
-                  }
-                ]
-              }
-            ]}
-            classes={{ ...classes }}
-          />
-          <SectionList sections={pageData.bottom} classes={{ ...classes }} />
         </Box>
+        <SectionList
+          sections={[
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavCategory',
+                  all: false,
+                  categoryPath: '/posts/category'
+                }
+              ]
+            }
+          ]}
+          classes={{ ...classesSection }}
+        />
         <Link href="/posts">{'Back to posts'}</Link>
       </Layout>
     </PageContext.Provider>
@@ -123,3 +178,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   };
 };
+

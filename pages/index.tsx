@@ -32,17 +32,17 @@ const IndexPage = ({ pageData }: { pageData: PageData }) => {
         home
         headerSections={proofileSection.concat(pageData.header)}
         title={pageData.title}
+        topSections={pageData.top}
+        bottomSections={pageData.bottom}
         footerSections={pageData.footer}
       >
         <Box my={1}>
-          <SectionList sections={pageData.top} classes={{ ...classes }} />
           <Box className={classes.pageMain}>
             <SectionList
               sections={pageData.sections}
               classes={{ ...classes }}
             />
           </Box>
-          <SectionList sections={pageData.bottom} classes={{ ...classes }} />
         </Box>
       </Layout>
     </PageContext.Provider>
