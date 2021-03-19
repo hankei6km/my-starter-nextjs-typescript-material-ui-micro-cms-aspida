@@ -40,7 +40,26 @@ export default function Post({
   }
   return (
     <PageContext.Provider value={pageData}>
-      <Layout title={pageData.title} pageData={pageData} classes={classes}>
+      <Layout
+        title={pageData.title}
+        pageData={{
+          ...pageData,
+          top: [
+            {
+              title: '目次のテスト',
+              persist: true,
+              content: [
+                {
+                  kind: 'partsNavContentToc',
+                  expanded: false
+                }
+              ]
+            },
+            ...pageData.top
+          ]
+        }}
+        classes={classes}
+      >
         <SectionList
           sections={[
             {

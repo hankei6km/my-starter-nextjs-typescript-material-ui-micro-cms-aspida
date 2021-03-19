@@ -18,9 +18,13 @@ const useStyles = makeStyles((theme) => ({
   'LayoutHeader-sectionTop': {},
   'LayoutHeader-sectionList': {},
   'LayoutContaienr-root': {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      justifyContent: 'center'
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'start'
     },
     width: '100%'
   },
@@ -28,32 +32,26 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxWidth: theme.breakpoints.values.sm
   },
-  'LayoutContaienrTop-persistSectionList': {
+  'LayoutContaienrTop-sectionList-inner': {
+    width: '100%',
+    maxWidth: theme.breakpoints.values.sm,
     [theme.breakpoints.up('md')]: {
+      position: 'sticky',
+      top: 50,
+      display: 'block',
       width: 300
     }
   },
-  'LayoutContaienrTop-sectionList': {
+  'LayoutContaienrBottom-sectionList-inner': {
+    width: '100%',
+    maxWidth: theme.breakpoints.values.sm,
     [theme.breakpoints.up('md')]: {
+      position: 'sticky',
+      top: 50,
       display: 'block',
-      width: 300
-    },
-    display: 'none'
-  },
-  'LayoutContaienrBottom-persistSectionList': {
-    [theme.breakpoints.up('md')]: {
       width: 300
     }
   },
-  'LayoutContaienrBottom-sectionList': {
-    [theme.breakpoints.up('md')]: {
-      display: 'block',
-      width: 300
-    },
-    display: 'none'
-  },
-  'LayoutContaienrTop-sectionList-inner': { position: 'sticky', top: 50 },
-  'LayoutContaienrBottom-sectionList-inner': { position: 'sticky', top: 50 },
   'LayoutFooter-root': {},
   'LayoutFooter-sectionList': {},
   'LayoutFooter-sectionBottom': {},
@@ -93,6 +91,20 @@ const useStylesGrid = makeStyles(() => ({
   },
   'SectionItem-root': {
     gridColumnEnd: 'span 6'
+  }
+}));
+const useStyleSidePersistSections = makeStyles((theme) => ({
+  'SectionItem-root': {
+    display: 'block',
+    maxWidth: theme.breakpoints.values.sm
+  }
+}));
+const useStyleSideSections = makeStyles((theme) => ({
+  'SectionItem-root': {
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    },
+    display: 'none'
   }
 }));
 const classNames = [
@@ -146,6 +158,12 @@ const Layout = ({
     classes: pruneClasses(inClasses, classNames)
   });
   const classesHeader = useStylesHeader({
+    classes: pruneClasses(inClasses, classNames)
+  });
+  const classesSidePersistSections = useStyleSidePersistSections({
+    classes: pruneClasses(inClasses, classNames)
+  });
+  const classesSideSections = useStyleSideSections({
     classes: pruneClasses(inClasses, classNames)
   });
   const { siteTitle } = useContext(siteContext).labels;
@@ -231,23 +249,17 @@ const Layout = ({
         </Container>
       </header>
       <Box className={classes['LayoutContaienr-root']}>
-        {topPersistSectionsLen > 0 && (
-          <Box className={classes['LayoutContaienrTop-persistSectionList']}>
-            <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
-              <SectionList
-                sections={topPersistSections}
-                classes={{ ...classes }}
-              />
-            </Box>
-          </Box>
-        )}
-        {topSectionsLen > 0 && (
-          <Box className={classes['LayoutContaienrTop-sectionList']}>
-            <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
-              <SectionList sections={topSections} classes={{ ...classes }} />
-            </Box>
-          </Box>
-        )}
+        <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
+          {topPersistSectionsLen > 0 && (
+            <SectionList
+              sections={topPersistSections}
+              classes={classesSidePersistSections}
+            />
+          )}
+          {topSectionsLen > 0 && (
+            <SectionList sections={topSections} classes={classesSideSections} />
+          )}
+        </Box>
         <Container className={classes['LayoutContaienr-body']} disableGutters>
           {sectionsLen > 0 && (
             <>
@@ -290,23 +302,20 @@ const Layout = ({
           )}
           <>{children}</>
         </Container>
-        {bottomPersistSectionsLen > 0 && (
-          <Box className={classes['LayoutContaienrBottom-persistSectionList']}>
-            <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
-              <SectionList
-                sections={bottomPersistSections}
-                classes={{ ...classes }}
-              />
-            </Box>
-          </Box>
-        )}
-        {bottomSectionsLen > 0 && (
-          <Box className={classes['LayoutContaienrBottom-sectionList']}>
-            <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
-              <SectionList sections={bottomSections} classes={{ ...classes }} />
-            </Box>
-          </Box>
-        )}
+        <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
+          {bottomPersistSectionsLen > 0 && (
+            <SectionList
+              sections={bottomPersistSections}
+              classes={classesSidePersistSections}
+            />
+          )}
+          {bottomSectionsLen > 0 && (
+            <SectionList
+              sections={bottomSections}
+              classes={classesSideSections}
+            />
+          )}
+        </Box>
       </Box>
       <footer className={classes['LayoutHeader-root']}>
         {footerSectionsLen > 0 && (
