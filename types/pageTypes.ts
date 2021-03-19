@@ -102,6 +102,7 @@ export type ContentToc = {
 export type Section = {
   title?: string;
   id?: string;
+  persist?: boolean;
   content: (
     | SectionBlank
     | SectionContent
