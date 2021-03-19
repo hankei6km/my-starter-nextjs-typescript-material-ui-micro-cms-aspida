@@ -3,7 +3,6 @@ import ErrorPage from 'next/error';
 import { makeStyles } from '@material-ui/core';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
-import Box from '@material-ui/core/Box';
 import { PageData } from '../../../types/pageTypes';
 import { getPagesPageData, getAllPaginationIds } from '../../../lib/pages';
 import SectionList from '../../../components/SectionList';
@@ -44,59 +43,36 @@ export default function Page({
   }
   return (
     <PageContext.Provider value={pageData}>
-      <Layout
-        headerSections={pageData.header}
-        title={pageData.title}
-        topSections={pageData.top}
-        bottomSections={pageData.bottom}
-        footerSections={pageData.footer}
-      >
-        <Box my={1}>
-          <SectionList
-            sections={[
-              {
-                title: '',
-                content: [
-                  {
-                    kind: 'partsNavCategory',
-                    all: true,
-                    categoryPath: '/posts/category'
-                  },
-                  {
-                    kind: 'partsPageTitle',
-                    link: ''
-                  }
-                ]
-              }
-            ]}
-            classes={{ ...classes }}
-          />
-          <Box className={classes.pageMain}>
-            <SectionList
-              sections={pageData.sections}
-              classes={{ ...classes }}
-            />
-          </Box>
-          <SectionList
-            sections={[
-              {
-                title: '',
-                content: [
-                  {
-                    kind: 'partsNavPagination',
-                    // section 側で展開した場合、取得できない情報が含まれている.
-                    // コンテンツ側で parts 指定することにした場合扱えないので注意
-                    href: '/posts/page/[..id]',
-                    baseAs: '/posts/page',
-                    pagePath: pagePath,
-                    firstPageHref: '/posts'
-                  }
-                ]
-              }
-            ]}
-            classes={{ ...classes }}
-          />
-        </Box>
+      <Layout title={pageData.title} pageData={pageData}>
+        <SectionList
+          sections={[
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavCategory',
+                  all: true,
+                  categoryPath: '/posts/category'
+                }
+              ]
+            },
+            {
+              title: '',
+              content: [
+                {
+                  kind: 'partsNavPagination',
+                  // section 側で展開した場合、取得できない情報が含まれている.
+                  // コンテンツ側で parts 指定することにした場合扱えないので注意
+                  href: '/posts/page/[..id]',
+                  baseAs: '/posts/page',
+                  pagePath: pagePath,
+                  firstPageHref: '/posts'
+                }
+              ]
+            }
+          ]}
+          classes={{ ...classes }}
+        />
         <Link href="/posts">{'Back to posts'}</Link>
       </Layout>
     </PageContext.Provider>

@@ -6,9 +6,12 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import siteContext from '../components/SiteContext';
 import { mergeSectionConfig } from '../components/SectionContext';
-import { Section } from '../types/pageTypes';
+import { PageData } from '../types/pageTypes';
 import SectionList from './SectionList';
 import { pruneClasses } from '../utils/classes';
+import SectionItem from './SectionItem';
+import siteConfig from '../src/site.config';
+import { wrapStyle } from '../utils/classes';
 
 const useStyles = makeStyles((theme) => ({
   'LayoutHeader-root': {},
@@ -48,6 +51,13 @@ const useStyles = makeStyles((theme) => ({
     // fontFamily:
     //   '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     fontWeight: 800
+  },
+  pageMain: {
+    ...wrapStyle(`& .${siteConfig.iamgeConfig.contentImageClassName}`, {
+      maxWidth: '100%',
+      height: '100%',
+      objectFit: 'scale-down'
+    })
   }
 }));
 
@@ -87,20 +97,27 @@ const classNames = [
   'LayoutContaienrBottom-sectionList-inner',
   'LayoutFooter-root',
   'LayoutFooter-sectionList',
-  'LayoutFooter-sectionBottom'
+  'LayoutFooter-sectionBottom',
+  'pageMain',
+  'SectionItem-root',
+  'SiteTitle-link',
+  'SiteLogo-link',
+  'SectionList-root',
+  'SectionItem-root'
 ];
 
+const sectionConfigInPosts = mergeSectionConfig({
+  naked: true
+});
 const sectionConfigInLayout = mergeSectionConfig({
+  naked: true,
   component: { sectionComponent: 'div' } // section とは、と思わなくはない。
 });
 
 type Props = {
   children?: ReactNode;
   title?: string;
-  headerSections?: Section[];
-  topSections?: Section[];
-  bottomSections?: Section[];
-  footerSections?: Section[];
+  pageData: PageData;
   home?: boolean;
   classes?: { [key: string]: string };
 };
@@ -108,10 +125,8 @@ type Props = {
 const Layout = ({
   children,
   title = '',
-  headerSections = [],
-  topSections = [],
-  bottomSections = [],
-  footerSections = [],
+  pageData,
+  home,
   classes: inClasses
 }: Props) => {
   const classes = useStyles({ classes: pruneClasses(inClasses, classNames) });
@@ -122,8 +137,11 @@ const Layout = ({
     classes: pruneClasses(inClasses, classNames)
   });
   const { siteTitle } = useContext(siteContext).labels;
-  const headerSectionsLen = headerSections.length;
-  const footerSectionsLen = footerSections.length;
+  const headerSectionsLen = pageData.header.length;
+  const topSectionsLen = pageData.top.length;
+  const sectionsLen = pageData.sections.length;
+  const bottomSectionsLen = pageData.bottom.length;
+  const footerSectionsLen = pageData.footer.length;
   const maxWidth = 'sm';
   return (
     <>
@@ -152,67 +170,126 @@ const Layout = ({
               config={sectionConfigInLayout}
               classes={{ ...classesHeader }}
             />
-          </Box>
-          <Box className={classes['LayoutHeader-sectionTop']}>
-            <SectionList
-              sections={headerSections.slice(0, 1)}
-              config={sectionConfigInLayout}
-              classes={{ ...classes }}
-            />
+            {home && (
+              <SectionList
+                sections={[
+                  {
+                    title: '',
+                    content: [
+                      {
+                        kind: 'partsProfileImage',
+                        size: '',
+                        name: true,
+                        link: ''
+                      }
+                    ]
+                  }
+                ]}
+                config={sectionConfigInLayout}
+                classes={{ ...classesHeader }}
+              />
+            )}
           </Box>
           {headerSectionsLen > 0 && (
-            <Box className={classes['LayoutHeader-sectionList']}>
-              <SectionList
-                sections={headerSections.slice(1)}
-                config={sectionConfigInLayout}
-                classes={{ ...classesHeaderFooter }}
-              />
-            </Box>
+            <>
+              <Box className={classes['LayoutHeader-sectionTop']}>
+                <SectionList
+                  sections={pageData.header.slice(0, 1)}
+                  config={sectionConfigInLayout}
+                  classes={{ ...classes }}
+                />
+              </Box>
+              <Box className={classes['LayoutHeader-sectionList']}>
+                <SectionList
+                  sections={pageData.header.slice(1)}
+                  config={sectionConfigInLayout}
+                  classes={{ ...classesHeaderFooter }}
+                />
+              </Box>
+            </>
           )}
         </Container>
       </header>
       <Box className={classes['LayoutContaienr-root']}>
-        <Box className={classes['LayoutContaienrTop-sectionList']}>
-          <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
-            <SectionList
-              sections={topSections}
-              config={sectionConfigInLayout}
-              classes={{ ...classes }}
-            />
+        {topSectionsLen > 0 && (
+          <Box className={classes['LayoutContaienrTop-sectionList']}>
+            <Box className={classes['LayoutContaienrTop-sectionList-inner']}>
+              <SectionList sections={pageData.top} classes={{ ...classes }} />
+            </Box>
           </Box>
-        </Box>
+        )}
         <Container className={classes['LayoutContaienr-body']} disableGutters>
+          {sectionsLen > 0 && (
+            <>
+              <SectionItem
+                data={{
+                  title: '',
+                  content: [
+                    {
+                      kind: 'partsNavBreadcrumbs',
+                      lastBreadcrumb: pageData.title
+                    }
+                  ]
+                }}
+              />
+              <SectionList
+                sections={[
+                  {
+                    title: '',
+                    content: [
+                      {
+                        kind: 'partsPageTitle',
+                        link: ''
+                      },
+                      {
+                        kind: 'partsUpdated'
+                      }
+                    ]
+                  }
+                ]}
+                config={sectionConfigInPosts}
+              />
+              <Box component="article" className={classes.pageMain}>
+                <SectionList
+                  sections={pageData.sections}
+                  config={sectionConfigInPosts}
+                  classes={{ ...classes }}
+                />
+              </Box>
+            </>
+          )}
           <>{children}</>
         </Container>
-        <Box className={classes['LayoutContaienrBottom-sectionList']}>
-          <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
-            <SectionList
-              sections={bottomSections}
-              config={sectionConfigInLayout}
-              classes={{ ...classes }}
-            />
+        {bottomSectionsLen > 0 && (
+          <Box className={classes['LayoutContaienrBottom-sectionList']}>
+            <Box className={classes['LayoutContaienrBottom-sectionList-inner']}>
+              <SectionList
+                sections={pageData.bottom}
+                classes={{ ...classes }}
+              />
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
       <footer className={classes['LayoutHeader-root']}>
-        <Container maxWidth={maxWidth} disableGutters>
-          {footerSectionsLen > 0 && (
+        {footerSectionsLen > 0 && (
+          <Container maxWidth={maxWidth} disableGutters>
             <Box className={classes['LayoutFooter-sectionList']}>
               <SectionList
-                sections={footerSections.slice(0, footerSectionsLen - 1)}
+                sections={pageData.footer.slice(0, footerSectionsLen - 1)}
                 config={sectionConfigInLayout}
                 classes={{ ...classesHeaderFooter }}
               />
             </Box>
-          )}
-          <Box className={classes['LayoutFooter-sectionBottom']}>
-            <SectionList
-              sections={footerSections.slice(-1)}
-              config={sectionConfigInLayout}
-              classes={{ ...classes }}
-            />
-          </Box>
-        </Container>
+            <Box className={classes['LayoutFooter-sectionBottom']}>
+              <SectionList
+                sections={pageData.footer.slice(-1)}
+                config={sectionConfigInLayout}
+                classes={{ ...classes }}
+              />
+            </Box>
+          </Container>
+        )}
       </footer>
     </>
   );

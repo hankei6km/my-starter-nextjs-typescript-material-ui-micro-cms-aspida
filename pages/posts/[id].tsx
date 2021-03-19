@@ -3,10 +3,8 @@ import ErrorPage from 'next/error';
 import { makeStyles } from '@material-ui/core';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
-import Box from '@material-ui/core/Box';
 import { PageData } from '../../types/pageTypes';
 import { getAllPagesIds, getPagesPageData } from '../../lib/pages';
-import { mergeSectionConfig } from '../../components/SectionContext';
 import SectionList from '../../components/SectionList';
 import siteConfig from '../../src/site.config';
 import { wrapStyle } from '../../utils/classes';
@@ -29,28 +27,6 @@ const useSectionStyles = makeStyles(() => ({
   'SectionItem-title': {}
 }));
 
-const useNoneUpMdStyles = makeStyles((theme) => ({
-  'NavContentToc-root': {
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    },
-    width: '100%'
-  }
-}));
-
-// const useDispUpMdStyles = makeStyles((theme) => ({
-//   'NavContentToc-root': {
-//     [theme.breakpoints.up('md')]: {
-//       display: 'none'
-//     },
-//     width: '100%'
-//   }
-// }));
-
-const sectionConfigInPosts = mergeSectionConfig({
-  naked: true
-});
-
 export default function Post({
   pageData
 }: {
@@ -59,83 +35,12 @@ export default function Post({
 }) {
   const classes = useStyles();
   const classesSection = useSectionStyles();
-  const classesNoneUpMd = useNoneUpMdStyles();
-  // const classesDispUpMd = useDispUpMdStyles();
   if (!pageData) {
     return <ErrorPage statusCode={404} />;
   }
   return (
     <PageContext.Provider value={pageData}>
-      <Layout
-        headerSections={pageData.header}
-        title={pageData.title}
-        topSections={pageData.top}
-        bottomSections={[
-          {
-            title: '',
-            content: [
-              {
-                kind: 'partsNavContentToc',
-                expanded: true
-              }
-            ]
-          },
-          ...pageData.bottom
-        ]}
-        footerSections={pageData.footer}
-      >
-        <SectionList
-          sections={[
-            {
-              title: '',
-              content: [
-                {
-                  kind: 'partsNavBreadcrumbs',
-                  lastBreadcrumb: pageData.title
-                }
-              ]
-            }
-          ]}
-          classes={{ ...classesSection }}
-        />
-        <Box component="section" className={classes.pageMain}>
-          <SectionList
-            sections={[
-              {
-                title: '',
-                content: [
-                  {
-                    kind: 'partsPageTitle',
-                    link: ''
-                  },
-                  {
-                    kind: 'partsUpdated'
-                  }
-                ]
-              }
-            ]}
-            config={sectionConfigInPosts}
-            classes={{ ...classesSection }}
-          />
-          <Box display="block" component="article">
-            <SectionList
-              sections={[
-                {
-                  title: '',
-                  content: [
-                    {
-                      kind: 'partsNavContentToc',
-                      expanded: false
-                    }
-                  ]
-                },
-                ...pageData.sections
-              ]}
-              config={sectionConfigInPosts}
-              classes={{ ...classesSection, ...classesNoneUpMd }}
-            />
-          </Box>
-        </Box>
+      <Layout title={pageData.title} pageData={pageData} classes={classes}>
         <SectionList
           sections={[
             {
