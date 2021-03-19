@@ -120,7 +120,7 @@ describe('getAllPagesIds()', () => {
 });
 
 describe('getPagesData()', () => {
-  it('should returns content data of "home"', async () => {
+  it('should returns cntent data of "home"', async () => {
     fetchMock.mockResponseOnce(
       JSON.stringify(mockDataPages.contents.find(({ id }) => id === 'home'))
     );
@@ -223,6 +223,7 @@ describe('getPagesPageData()', () => {
           {
             title: 'intro',
             id: 'intro',
+            persist: false,
             content: [
               {
                 kind: 'html',
@@ -353,6 +354,7 @@ describe('getPagesPageData()', () => {
           {
             title: 'language & library',
             id: 'language---library',
+            persist: false,
             content: [
               {
                 kind: 'html',
@@ -371,6 +373,7 @@ describe('getPagesPageData()', () => {
           {
             title: 'environment',
             id: 'environment',
+            persist: false,
             content: [
               {
                 kind: 'html',
@@ -388,6 +391,7 @@ describe('getPagesPageData()', () => {
           {
             title: '',
             id: '',
+            persist: false,
             content: [
               {
                 kind: 'html',

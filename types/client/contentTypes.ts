@@ -74,31 +74,26 @@ type PageContent =
   | PagesContentFragArticles
   | PagesContentImage
   | PagesContentNotification;
-type PagesSectionContent = {
-  fieldId: 'sectionContent';
+type PagesSectionBase = {
   title?: string;
   content: PageContent[]; // array にしているが、API スキーマ等にあわせたもので、１つコンテントという認識(articlesはちょっと違うか)
+  persist?: boolean; // SectionContent では効力は発生しない
 };
+type PagesSectionContent = {
+  fieldId: 'sectionContent';
+} & PagesSectionBase;
 type PagesSectionTop = {
   fieldId: 'sectionTop';
-  title?: string;
-  content: PageContent[];
-};
+} & PagesSectionBase;
 type PagesSectionBottom = {
   fieldId: 'sectionBottom';
-  title?: string;
-  content: PageContent[];
-};
+} & PagesSectionBase;
 type PagesSectionHeader = {
   fieldId: 'sectionHeader';
-  title?: string;
-  content: PageContent[];
-};
+} & PagesSectionBase;
 type PagesSectionFooter = {
   fieldId: 'sectionFooter';
-  title?: string;
-  content: PageContent[];
-};
+} & PagesSectionBase;
 type PagesSection =
   | PagesSectionContent
   | PagesSectionTop

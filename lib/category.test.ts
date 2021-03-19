@@ -91,6 +91,7 @@ describe('getSortedPagesData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -116,6 +117,7 @@ describe('getSortedPagesData()', () => {
         {
           title: 'all posts',
           id: 'all-posts',
+          persist: false,
           content: [
             {
               kind: 'posts',
@@ -155,6 +157,7 @@ describe('getSortedPagesData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -180,6 +183,7 @@ describe('getSortedPagesData()', () => {
         {
           title: 'language & library',
           id: 'language---library',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -198,6 +202,7 @@ describe('getSortedPagesData()', () => {
         {
           title: 'environment',
           id: 'environment',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -215,6 +220,7 @@ describe('getSortedPagesData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',

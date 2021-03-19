@@ -302,6 +302,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -322,6 +323,7 @@ describe('getPagesPageData()', () => {
         {
           title: 'language & library',
           id: 'language---library',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -340,6 +342,7 @@ describe('getPagesPageData()', () => {
         {
           title: 'environment',
           id: 'environment',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -357,6 +360,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -427,6 +431,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -452,6 +457,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -471,6 +477,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -496,6 +503,7 @@ describe('getPagesPageData()', () => {
         {
           title: 'language & library',
           id: 'language---library',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -514,6 +522,7 @@ describe('getPagesPageData()', () => {
         {
           title: 'environment',
           id: 'environment',
+          persist: false,
           content: [
             {
               kind: 'html',
@@ -531,6 +540,7 @@ describe('getPagesPageData()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html',

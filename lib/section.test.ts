@@ -34,6 +34,7 @@ describe('getPagePostsTotalCountFromSection()', () => {
         {
           title: 'content section',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -62,6 +63,7 @@ describe('getPagePostsTotalCountFromSection()', () => {
         {
           title: 'content section',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -79,6 +81,7 @@ describe('getPagePostsTotalCountFromSection()', () => {
         {
           title: 'content section',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'posts' as const,
@@ -98,6 +101,7 @@ describe('getPagePostsTotalCountFromSection()', () => {
         {
           title: 'content section',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -124,6 +128,7 @@ describe('getTocFromSections()', () => {
         {
           title: '',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -141,6 +146,7 @@ describe('getTocFromSections()', () => {
         {
           title: 'one',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -158,6 +164,7 @@ describe('getTocFromSections()', () => {
         {
           title: 'two',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -187,6 +194,7 @@ describe('getTocFromSections()', () => {
         {
           title: 'three end',
           id: '',
+          persist: false,
           content: [
             {
               kind: 'html' as const,
@@ -371,6 +379,7 @@ describe('getSectionFromPages()', () => {
       {
         title: 'content section',
         id: 'content-section',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -390,6 +399,7 @@ describe('getSectionFromPages()', () => {
       {
         title: 'top section',
         id: 'top-section',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -409,6 +419,7 @@ describe('getSectionFromPages()', () => {
       {
         title: 'bottom section',
         id: 'bottom-section',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -428,6 +439,7 @@ describe('getSectionFromPages()', () => {
       {
         title: 'header section',
         id: 'header-section',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -447,6 +459,7 @@ describe('getSectionFromPages()', () => {
       {
         title: 'footer section',
         id: 'footer-section',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -471,6 +484,7 @@ describe('getSectionFromPages()', () => {
         {
           fieldId: 'sectionContent',
           title: '',
+          persist: false,
           content: [
             {
               fieldId: 'contentMarkdown',
@@ -484,6 +498,7 @@ describe('getSectionFromPages()', () => {
       {
         title: '',
         id: '',
+        persist: false,
         content: [
           {
             kind: 'html',
@@ -514,6 +529,7 @@ describe('getSectionFromPages()', () => {
         {
           fieldId: 'sectionContent',
           title: '',
+          persist: false,
           content: [
             {
               fieldId: 'contentFragArticles',
@@ -530,6 +546,7 @@ describe('getSectionFromPages()', () => {
       {
         title: '',
         id: '',
+        persist: false,
         content: [
           {
             kind: 'posts',
@@ -561,6 +578,7 @@ describe('getSectionFromPages()', () => {
         {
           fieldId: 'sectionHeader',
           title: '',
+          persist: false,
           content: [
             {
               fieldId: 'contentNotification',
@@ -603,6 +621,7 @@ describe('getSectionFromPages()', () => {
       {
         title: '',
         id: '',
+        persist: false,
         content: [
           {
             kind: 'notification',

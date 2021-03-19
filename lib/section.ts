@@ -105,6 +105,7 @@ export async function getSectionFromPages(
     .filter(({ fieldId }) => fieldId === kind)
     .map((section) => ({
       title: section.title || '',
+      persist: section.persist !== undefined ? section.persist : false,
       content: section.content.map((content) => {
         return async () => {
           if (content.fieldId === 'contentHtml') {
@@ -237,6 +238,7 @@ export async function getSectionFromPages(
         return {
           title: section.title,
           id: getTocLabel(section.title || ''),
+          persist: section.persist,
           // content: []
           content: await Promise.all(
             section.content.map((content) => content())
